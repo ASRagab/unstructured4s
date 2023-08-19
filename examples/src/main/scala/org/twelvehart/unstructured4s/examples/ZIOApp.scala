@@ -29,7 +29,7 @@ object ZIOApp extends ZIOAppDefault:
     ZIO.scoped {
       for
         backend            <- ZIO.service[SttpClient]
-        unstructuredClient <- Unstructured4s.make(backend, ApiKey(""))
+        unstructuredClient <- Unstructured4s.make(backend, ApiKey("<your-api-key>"))
         response           <- unstructuredClient.post(request)
         body               <- ZIO.fromEither(response.body)
         _                  <- Console.printLine(body.toJsonPretty)

@@ -16,7 +16,7 @@ object CatsEffectApp extends IOApp.Simple {
 
   private val unstructured4sResource
       : Resource[IO, IO[Unstructured4s[IO, Fs2Streams[IO] with capabilities.WebSockets]]] =
-    sttpResource.map(backend => Unstructured4s.make(backend, ApiKey("")))
+    sttpResource.map(backend => Unstructured4s.make(backend, ApiKey("<your-api-key>")))
 
   private val fileIO: IO[UnstructuredFile] =
     IO

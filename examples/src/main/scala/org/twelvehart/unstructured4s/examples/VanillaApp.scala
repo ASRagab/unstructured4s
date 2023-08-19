@@ -14,6 +14,6 @@ object VanillaApp extends App:
   given responseAs: ResponseAs[Either[DeserializationException[Error], Json], Any] =
     asJsonAlways[Json]
 
-  val client   = Unstructured4s.simple(ApiKey(""))
+  val client   = Unstructured4s.simple(ApiKey("<your-api-key>"))
   val response = client.post(HiResPayload(Seq(file)))
   response.body.fold(println, println)
