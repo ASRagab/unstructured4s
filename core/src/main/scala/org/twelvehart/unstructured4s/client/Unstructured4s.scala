@@ -6,7 +6,7 @@ import sttp.model.*
 
 export Model.{*, given}
 
-class Unstructured4s[F[_], P](val client: SttpBackend[F, P], val apiKey: ApiKey):
+class Unstructured4s[F[_], P](client: SttpBackend[F, P], apiKey: ApiKey):
   def post[E, A](
       request: RequestPayload,
       customHeaders: List[Header] = Nil

@@ -1,4 +1,4 @@
-name: Pull Request Workflow
+name: pull-request
 
 on:
   pull_request:
@@ -13,7 +13,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  test:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,4 +24,6 @@ jobs:
           distribution: temurin
           java-version: 17
       - name: Build and Test
-        run: sbt -v "scalafmtCheckAll; +test;"
+        run: sbt -v "+scalafmtCheckAll;+test;"
+      - name: Binary Compatibility Check
+        run: sbt +mimaReportBinaryIssues
