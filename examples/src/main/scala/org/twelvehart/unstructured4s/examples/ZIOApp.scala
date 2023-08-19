@@ -14,7 +14,7 @@ import zio.json.ast.Json
 import java.io.File
 
 object ZIOApp extends ZIOAppDefault:
-  val live: ZLayer[Any, Throwable, SttpBackend[Task, ZioStreams with WebSockets]] =
+  val live: ZLayer[Any, Throwable, SttpBackend[Task, ZioStreams & WebSockets]] =
     AsyncHttpClientZioBackend.layer()
 
   val file: UnstructuredFile =
@@ -36,5 +36,5 @@ object ZIOApp extends ZIOAppDefault:
       yield ()
     }
 
-  override def run: ZIO[Any with ZIOAppArgs with Scope, Any, Any] =
+  override def run: ZIO[ZIOAppArgs & Scope, Any, Any] =
     program.provide(live)

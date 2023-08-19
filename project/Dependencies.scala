@@ -38,7 +38,8 @@ object Dependencies {
     sttpSlf4j,
     circe,
     circeGeneric,
-    circeParser
+    circeParser,
+    scalaTest
   )
 
   lazy val examples: Seq[ModuleID] = Seq(
@@ -50,6 +51,7 @@ object Dependencies {
     sttpZio,
     sttpFs2,
     zioJson,
-    sttpZioJson
+    sttpZioJson,
+    scalaTest
   )
 }

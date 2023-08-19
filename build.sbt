@@ -2,10 +2,10 @@ Global / onChangedBuildSource := ReloadOnSourceChanges
 
 ThisBuild / scalaVersion := "3.3.0"
 
-addCommandAlias("fmt", "scalafmtAll")
+addCommandAlias("prepare", "scalafmtAll;test")
 
 lazy val commonOptions =
-  Seq("-Xfatal-warnings", "-source:future", "-Ykind-projector:underscores", "-Xmax-inlines", "100")
+  Seq("-Xfatal-warnings", "-source:future", "-Ykind-projector:underscores", "-Xmax-inlines", "100", "-deprecation")
 
 val commonSettings = Seq(
   scalacOptions ++= commonOptions
@@ -30,5 +30,6 @@ lazy val examples = (project in file("examples"))
   .settings(
     commonSettings,
     name           := "unstructured4s-examples",
-    publish / skip := true
+    publish / skip := true,
+    libraryDependencies ++= Dependencies.examples
   )

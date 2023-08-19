@@ -29,6 +29,9 @@ object Unstructured4s:
   def simple(apiKey: ApiKey): Unstructured4s[Identity, Any] =
     Unstructured4s(HttpClientSyncBackend(), apiKey)
 
+  def synchronous(client: SttpBackend[Identity, Any], apiKey: ApiKey): Identity[Unstructured4s[Identity, Any]] =
+    Unstructured4s(client, apiKey)
+
   def make[F[_]: Async, P](client: SttpBackend[F, P], apiKey: ApiKey): F[Unstructured4s[F, P]] =
     summon[Async[F]].delay(Unstructured4s(client, apiKey))
 
