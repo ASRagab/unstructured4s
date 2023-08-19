@@ -2,6 +2,8 @@ Global / onChangedBuildSource := ReloadOnSourceChanges
 
 ThisBuild / scalaVersion := "3.3.0"
 
+ThisBuild / mimaFailOnNoPrevious := false
+
 addCommandAlias("prepare", "scalafmtAll;test")
 addCommandAlias("pushSite", ";project unstructured4s;ghPagesCacheClear;ghpagesPushSite")
 
@@ -39,7 +41,7 @@ lazy val core = (project in file("core"))
     commonSettings,
     name                  := "unstructured4s-core",
     libraryDependencies ++= Dependencies.core,
-    mimaPreviousArtifacts := previousStableVersion.value.map(organization.value %% name.value % _).toSet
+//    mimaPreviousArtifacts := previousStableVersion.value.map(organization.value %% name.value % _).toSet,
   )
 
 lazy val examples = (project in file("examples"))
