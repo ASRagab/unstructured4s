@@ -7,7 +7,7 @@ sonatypeBundleDirectory := (ThisBuild / baseDirectory).value / target.value.getN
 ThisBuild / scmInfo := Some(
   ScmInfo(
     url("https://github.com/ASRagab/unstructured4s"),
-    "scm:git@github.com:ASRagab/unstructured4s.git"
+    "scm:git:git@github.com:ASRagab/unstructured4s.git"
   )
 )
 
