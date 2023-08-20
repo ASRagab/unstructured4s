@@ -60,6 +60,7 @@ class Unstructured4sSpec extends AnyFlatSpec with Matchers with EitherValues:
 
     val testingBackend: SttpBackendStub[Identity, capabilities.WebSockets] =
       SttpBackendStub.synchronous.whenAnyRequest.thenRespond(responseJson)
+
     val pdfEither: Either[Throwable, UnstructuredFile] = {
       val currentDir = new File(".").getCanonicalPath
       Try(new File(currentDir, "data/sample.pdf")).map(UnstructuredFile(_)).toEither
@@ -70,4 +71,3 @@ class Unstructured4sSpec extends AnyFlatSpec with Matchers with EitherValues:
       val response = client.multiple(Seq(pdf))
       response.result.value `shouldBe` decode[List[List[ResponsePayload]]](responseJson).value
     )
-
