@@ -1,19 +1,35 @@
 package org.twelvehart.unstructured4s.examples
 
-import io.circe.*
+import cats.implicits.*
 import org.twelvehart.unstructured4s.client.*
-import sttp.client3.circe.asJsonAlways
-import sttp.client3.{DeserializationException, ResponseAs}
+import org.twelvehart.unstructured4s.client.model.*
+import org.twelvehart.unstructured4s.client.model.UnstructuredRequestFields.HiResRequestFields
 
 import java.io.File
+import scala.util.Try
 
 object VanillaApp extends App:
-  val file: UnstructuredFile =
-    UnstructuredFile(new File(getClass.getClassLoader.getResource("sample.pdf").getFile))
+  val pdfEither: Either[Throwable, UnstructuredFile] = {
+    val currentDir = new File(".").getCanonicalPath
+    Try(new File(currentDir, "data/sample.pdf")).map(UnstructuredFile(_)).toEither
+  }
 
-  given responseAs: ResponseAs[Either[DeserializationException[Error], Json], Any] =
-    asJsonAlways[Json]
+  val pngEither: Either[Throwable, UnstructuredFile] = {
+    val currentDir = new File(".").getCanonicalPath
+    Try(new File(currentDir, "data/sample.png")).map(UnstructuredFile(_)).toEither
+  }
 
-  val client   = Unstructured4s.simple(ApiKey("<your-api-key>"))
-  val response = client.post(HiResPayload(Seq(file)))
-  response.body.fold(println, println)
+  val files     = pdfEither.map(Seq(_)) |+| pngEither.map(Seq(_))
+  val apiKeyEnv = sys.env.get("UNSTRUCTURED_API_KEY")
+
+  def program(fileEither: Either[Throwable, Seq[UnstructuredFile]]) =
+    for
+      files    <- fileEither.left.map(_.getMessage)
+      apiKey   <- apiKeyEnv.toRight[String]("UNSTRUCTURED_API_KEY environment variable not set")
+      client    = Unstructured4s.simple(ApiKey(apiKey))
+      response <- client.multiple(files, HiResRequestFields())
+      result   <- response.result
+      _         = println(result)
+    yield ()
+
+  program(files).fold(println, identity)

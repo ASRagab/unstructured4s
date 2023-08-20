@@ -4,11 +4,22 @@ ThisBuild / scalaVersion := "3.3.0"
 
 ThisBuild / mimaFailOnNoPrevious := false
 
+ThisBuild / envFileName := ".envrc"
+
 addCommandAlias("prepare", "scalafmtAll;test")
 addCommandAlias("pushSite", ";project unstructured4s;ghPagesCacheClear;ghpagesPushSite")
 
 lazy val commonOptions =
-  Seq("-Xfatal-warnings", "-source:future", "-Ykind-projector:underscores", "-Xmax-inlines", "100", "-deprecation")
+  Seq(
+    "-Xfatal-warnings",
+    "-source:future",
+    "-Ykind-projector:underscores",
+    "-Xmax-inlines",
+    "100",
+    "-deprecation",
+    "-feature",
+    "-language:implicitConversions"
+  )
 
 val commonSettings = Seq(
   scalacOptions ++= commonOptions
@@ -39,8 +50,8 @@ lazy val unstructured4s = (project in file("."))
 lazy val core = (project in file("core"))
   .settings(
     commonSettings,
-    name                  := "unstructured4s-core",
-    libraryDependencies ++= Dependencies.core,
+    name := "unstructured4s-core",
+    libraryDependencies ++= Dependencies.core
 //    mimaPreviousArtifacts := previousStableVersion.value.map(organization.value %% name.value % _).toSet,
   )
 
