@@ -28,7 +28,7 @@ object Dependencies {
   lazy val zio        = "dev.zio" %% "zio"              % V.zio
   lazy val zioTestSbt = "dev.zio" %% "zio-test-sbt"     % V.zio
   lazy val zioCats    = "dev.zio" %% "zio-interop-cats" % "23.0.0.5"
-  lazy val zioJson    = "dev.zio" %% "zio-json"         % "0.5.0"
+  lazy val zioJson    = "dev.zio" %% "zio-json"         % "0.6.0"
 
   lazy val core: Seq[ModuleID] = Seq(
     cats,
