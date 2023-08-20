@@ -7,7 +7,7 @@ object V {
 }
 
 object Dependencies {
-  lazy val cats              = "org.typelevel" %% "cats-core"                     % "2.9.0"
+  lazy val cats              = "org.typelevel" %% "cats-core"                     % "2.10.0"
   lazy val catsEffect        = "org.typelevel" %% "cats-effect"                   % "3.5.1"
   lazy val catsEffectTesting = "org.typelevel" %% "cats-effect-testing-scalatest" % "1.5.0" % Test
 
