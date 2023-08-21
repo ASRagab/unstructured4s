@@ -1,4 +1,4 @@
-name: pull-request
+name: ci
 
 on:
   pull_request:
@@ -27,3 +27,8 @@ jobs:
         run: sbt -v "+scalafmtCheckAll;+test;"
       - name: Binary Compatibility Check
         run: sbt +mimaReportBinaryIssues
+      - name: Run BasicApp
+        env:
+          UNSTRUCTURED_API_KEY: ${{ secrets.UNSTRUCTURED_API_KEY }}
+        run: |
+          sbt "examples/runMain org.twelvehart.unstructured4s.examples.BasicApp" 
