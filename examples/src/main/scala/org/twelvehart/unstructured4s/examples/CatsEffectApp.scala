@@ -1,6 +1,7 @@
 package org.twelvehart.unstructured4s.examples
 
 import cats.effect.*
+import cats.implicits.*
 import org.twelvehart.unstructured4s.*
 import org.twelvehart.unstructured4s.model.*
 import sttp.capabilities
@@ -16,8 +17,9 @@ object CatsEffectApp extends IOApp.Simple:
       .map(backend =>
         Slf4jLoggingBackend(
           backend,
-          logRequestHeaders = false,
-          logRequestBody = true
+          logRequestHeaders = true,
+          logRequestBody = true,
+          sensitiveHeaders = Set("unstructured-api-key")
         )
       )
 
@@ -28,6 +30,6 @@ object CatsEffectApp extends IOApp.Simple:
         client   <- Unstructured4s.make(backend, ApiKey(apiKey))
         file     <- IO.fromEither(pdfEither)
         response <- client.partition(file, HiResRequestFields())
-        _        <- IO.fromEither(response.result).map(result => println(result.mkString("\n")))
+        _        <- IO.println(response.result.bimap(_.getMessage, _.mkString("\n")).merge)
       yield ()
     }

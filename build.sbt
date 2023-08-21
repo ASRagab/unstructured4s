@@ -2,6 +2,8 @@ import org.typelevel.scalacoptions.ScalacOptions
 
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
+Global / excludeLintKeys ++= Set(ThisBuild / pomIncludeRepository, unstructured4s / paradox / sourceDirectory)
+
 ThisBuild / scalaVersion := "3.3.0"
 
 ThisBuild / mimaFailOnNoPrevious := false
@@ -20,9 +22,9 @@ lazy val unstructured4s = (project in file("."))
   .settings(
     commonSettings,
     CustomTasks.settings,
-    publish / skip                 := true,
-    Compile / publishArtifact      := false,
-    Compile / paradoxMaterialTheme :=
+    publish / skip                   := true,
+    Compile / publishArtifact        := false,
+    Compile / paradoxMaterialTheme   :=
       ParadoxMaterialTheme()
         .withColor("blue-grey", "orange")
         .withRepository(uri("https://github.com/ASRagab/unstructured4s"))
@@ -35,9 +37,13 @@ lazy val unstructured4s = (project in file("."))
     Compile / paradoxProperties ++= Map(
       "snip.core.base_dir" -> ((ThisBuild / baseDirectory).value / "core").getAbsolutePath
     ),
-    paradox / sourceDirectory      := sourceDirectory.value / "paradox",
-    git.remoteRepo                 := scmInfo.value.get.connection.replace("scm:git:", ""),
-    Test / tpolecatExcludeOptions += ScalacOptions.warnNonUnitStatement
+    paradox / sourceDirectory        := sourceDirectory.value / "paradox",
+    git.remoteRepo                   := scmInfo.value.get.connection.replace("scm:git:", ""),
+    Test / tpolecatExcludeOptions += ScalacOptions.warnNonUnitStatement,
+    ghpagesCleanSite / excludeFilter :=
+      new FileFilter {
+        def accept(f: File) = (ghpagesRepository.value / "CNAME").getCanonicalPath == f.getCanonicalPath
+      } || "versions.html"
   )
   .aggregate(core, examples)
 

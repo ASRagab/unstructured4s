@@ -1,11 +1,11 @@
 package org.twelvehart.unstructured4s.model
 
+import org.twelvehart.unstructured4s.model.OCRStrategy.Auto
 import sttp.client3.*
 import sttp.model.Uri
 import sttp.model.Part
 
 import scala.annotation.unused
-
 import java.io.File
 
 export CanMultipart.given
@@ -54,8 +54,8 @@ object Unstructured4sRequestFields:
   private val OcrLanguagesField           = "ocr_languages"
   private val PdfInferTableStructureField = "pdf_infer_table_structure"
 
-  // #general_request_fields
   final case class GeneralRequestFields(
+      // #general_request_fields
       outputFormat: OutputFormat = OutputFormat.Json,
       xmlKeepTags: Boolean = false,
       coordinates: Boolean = false,
@@ -63,41 +63,42 @@ object Unstructured4sRequestFields:
       skipInferTableTypes: Option[Vector[String]] = None,
       ocrLanguages: Option[Seq[String]] = None,
       includePageBreaks: Boolean = false,
-      ocrStrategy: Option[OCRStrategy] = None
+      ocrStrategy: OCRStrategy = OCRStrategy.Auto
+      // #general_request_fields
   ) extends Unstructured4sRequestFields:
-    // #general_request_fields
-    override def toMultipartSequence: List[Part[RequestBody[Any]]] =
 
+    override def toMultipartSequence: List[Part[RequestBody[Any]]] =
       val requiredParts = List(
         outputFormat.toMultipart,
         multipart(XmlKeepTagsField, xmlKeepTags.toString),
         multipart(CoordinatesField, coordinates.toString),
         encoding.toMultipart,
-        multipart(IncludePageBreaksField, includePageBreaks.toString)
+        multipart(IncludePageBreaksField, includePageBreaks.toString),
+        ocrStrategy.toMultipart
       )
 
       val skipInferTableTypesPart =
         skipInferTableTypes.map(types => multipart(SkipInferTableTypesField, types.mkString("[", ",", "]")))
       val ocrLanguagesPart        =
         ocrLanguages.map(langs => multipart(OcrLanguagesField, langs.mkString))
-      val ocrStrategyPart         = ocrStrategy.map(_.toMultipart)
 
-      val maybeParts = List(ocrLanguagesPart, skipInferTableTypesPart, ocrStrategyPart).flatten
+      val maybeParts = List(ocrLanguagesPart, skipInferTableTypesPart).flatten
       requiredParts ++ maybeParts
   end GeneralRequestFields
 
-  // #hires_request_fields
   final case class HiResRequestFields(
+      // #hires_request_fields
       outputFormat: OutputFormat = OutputFormat.Json,
-      encoding: Encoding = Encoding("utf-8"),
+      encoding: Encoding = `UTF-8`,
       coordinates: Boolean = false,
       pdfInferTableStructure: Boolean = false,
       skipInferTableTypes: Option[Vector[String]] = None,
       includePageBreaks: Boolean = false,
       hiResModelName: Option[HiResModelName] = None,
       ocrLanguages: Option[Seq[String]] = None
+      // #hires_request_fields
   ) extends Unstructured4sRequestFields:
-    // #hires_request_fields
+
     override def toMultipartSequence: List[Part[RequestBody[Any]]] =
       val ocrLanguagesPart        =
         ocrLanguages.map(langs => multipart(OcrLanguagesField, langs.mkString))

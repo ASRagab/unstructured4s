@@ -1,5 +1,6 @@
 package org.twelvehart.unstructured4s.examples
 
+import cats.implicits.*
 import org.twelvehart.unstructured4s.*
 import org.twelvehart.unstructured4s.model.*
 import sttp.capabilities.WebSockets
@@ -19,8 +20,9 @@ object ZIOApp extends ZIOAppDefault:
         .map(backend =>
           Slf4jLoggingBackend(
             backend,
-            logRequestHeaders = false,
-            logRequestBody = true
+            logRequestHeaders = true,
+            logRequestBody = true,
+            sensitiveHeaders = Set("unstructured-api-key")
           )
         )
     }
@@ -33,8 +35,8 @@ object ZIOApp extends ZIOAppDefault:
         backend            <- ZIO.service[SttpClient]
         unstructuredClient <- Unstructured4s.make(backend, ApiKey(apiKey))
         response           <- unstructuredClient.partitionMultiple(files)
-        result             <- ZIO.fromEither(response.result)
-        _                  <- Console.printLine(result.mkString("\n"))
+        result              = response.result.bimap(_.getMessage, _.mkString("\n")).merge
+        _                  <- Console.printLine(result)
       yield ()
     }
 

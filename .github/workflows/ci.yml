@@ -18,6 +18,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          lfs: true
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
@@ -27,8 +29,8 @@ jobs:
         run: sbt -v "+scalafmtCheckAll;+test;"
       - name: Binary Compatibility Check
         run: sbt +mimaReportBinaryIssues
-      - name: Run BasicApp
+      - name: Run Cats Effect Example
         env:
           UNSTRUCTURED_API_KEY: ${{ secrets.UNSTRUCTURED_API_KEY }}
         run: |
-          sbt "examples/runMain org.twelvehart.unstructured4s.examples.BasicApp" 
+          sbt "examples/runMain org.twelvehart.unstructured4s.examples.CatsEffectApp" 
