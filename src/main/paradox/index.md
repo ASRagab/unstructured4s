@@ -1,19 +1,31 @@
 # Unstructured4s
 
-A library that wraps the [Unstructured] API.
+A Scala 3 library that wraps the [Unstructured] API.
 
 [Unstructured]: https://unstructured.io
 
-## Requisites
-
-The library is only available for Scala 3 at the moment.
-
 ## Setup
 
-Add the following dependency to your `build.sbt` file:
+The library is published to [Sonatype] and [Maven Central].
 
-@@@vars
-~~~ scala
-libraryDependencies += "org.twelvehart" %% "unstructured4s-core" % "$project.version$"
-~~~
+@@dependency[sbt,Maven,Gradle] {
+    group="org.twelvehart" 
+    artifact="unstructured4s-core"
+    version="$project.version$"
+}
+
+<br/>
+
+See the @link:[Unstructured4s Examples](https://github.com/ASRagab/unstructured4s/tree/main/examples/src/main/scala/org/twelvehart/unstructured4s/examples) { open=new } 
+for an even quicker start.
+
+[Sonatype]: https://s01.oss.sonatype.org/content/repositories/releases/org/twelvehart/unstructured4s-core_3/
+[Maven Central]: https://search.maven.org/artifact/org/twelvehart/unstructured4s-core_3
+
+
+@@@ index
+
+* [Getting Started](getting-started.md)
+* [Making Requests](making-requests.md)
+* [Responses](responses.md)
 @@@

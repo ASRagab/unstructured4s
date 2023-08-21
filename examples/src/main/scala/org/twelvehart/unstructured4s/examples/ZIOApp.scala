@@ -1,40 +1,45 @@
 package org.twelvehart.unstructured4s.examples
 
-import org.twelvehart.unstructured4s.client.*
+import org.twelvehart.unstructured4s.*
+import org.twelvehart.unstructured4s.model.*
 import sttp.capabilities.WebSockets
 import sttp.capabilities.zio.ZioStreams
 import sttp.client3.*
-import sttp.client3.ziojson.*
 import sttp.client3.asynchttpclient.zio.*
-import zio.interop.catz.*
+import sttp.client3.logging.slf4j.Slf4jLoggingBackend
+import zio.logging.backend.SLF4J
 import zio.*
-import zio.json.*
-import zio.json.ast.Json
-
-import java.io.File
+import zio.interop.catz.*
 
 object ZIOApp extends ZIOAppDefault:
-  val live: ZLayer[Any, Throwable, SttpBackend[Task, ZioStreams & WebSockets]] =
-    AsyncHttpClientZioBackend.layer()
+  private val live: ZLayer[Any, Throwable, SttpBackend[Task, ZioStreams with WebSockets]] =
+    ZLayer.scoped {
+      AsyncHttpClientZioBackend
+        .scoped()
+        .map(backend =>
+          Slf4jLoggingBackend(
+            backend,
+            logRequestHeaders = false,
+            logRequestBody = true
+          )
+        )
+    }
 
-  val file: UnstructuredFile =
-    UnstructuredFile(new File(getClass.getClassLoader.getResource("sample.pdf").getFile))
-
-  val request: HiResPayload = HiResPayload(Seq(file))
-
-  given decoder: ResponseAs[Either[ResponseException[String, String], Json], Any] =
-    asJsonAlways[Json]
-
-  def program: ZIO[SttpClient, Throwable, Unit] =
+  private def program: ZIO[SttpClient, Throwable, Unit] =
     ZIO.scoped {
       for
+        apiKey             <- ZIO.fromEither(apiKeyEnv)
+        files              <- ZIO.fromEither(filesEither)
         backend            <- ZIO.service[SttpClient]
-        unstructuredClient <- Unstructured4s.make(backend, ApiKey("<your-api-key>"))
-        response           <- unstructuredClient.post(request)
-        body               <- ZIO.fromEither(response.body)
-        _                  <- Console.printLine(body.toJsonPretty)
+        unstructuredClient <- Unstructured4s.make(backend, ApiKey(apiKey))
+        response           <- unstructuredClient.partitionMultiple(files)
+        result             <- ZIO.fromEither(response.result)
+        _                  <- Console.printLine(result.mkString("\n"))
       yield ()
     }
+
+  override val bootstrap: ZLayer[ZIOAppArgs, Any, Any] =
+    Runtime.removeDefaultLoggers >>> SLF4J.slf4j
 
   override def run: ZIO[ZIOAppArgs & Scope, Any, Any] =
     program.provide(live)
