@@ -26,16 +26,17 @@ object Metadata:
       (value.filename, value.filetype, value.pageNumber)
     )
 
-enum Unstructured4sError(val body: String, val error: String) extends Exception(error):
-  case JsonParseError(override val body: String, override val error: String) extends Unstructured4sError(body, error)
-  case HttpResponseError(override val body: String, val statusCode: String)
-      extends Unstructured4sError(body, statusCode)
+enum Unstructured4sError(val message: String) extends Exception(message):
+  case JsonParseError(override val message: String)    extends Unstructured4sError(message)
+  case HttpResponseError(override val message: String) extends Unstructured4sError(message)
 
 given Conversion[ResponseException[String, io.circe.Error], Unstructured4sError] with
   def apply(responseException: ResponseException[String, io.circe.Error]): Unstructured4sError =
     responseException match
-      case DeserializationException(body, error) => Unstructured4sError.JsonParseError(body, error.getMessage)
-      case HttpError(body, code)                 => Unstructured4sError.HttpResponseError(body, code.toString)
+      case DeserializationException(body, error) =>
+        Unstructured4sError.JsonParseError(s"Issue parsing response ${error.getMessage}: $body")
+      case HttpError(body, code)                 =>
+        Unstructured4sError.HttpResponseError(s"Http status ${code}: $body")
 
 // #unstructured4s_response
 case class Unstructured4sResponse[A](result: Either[Unstructured4sError, List[A]])

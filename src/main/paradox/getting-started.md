@@ -1,25 +1,27 @@
 # Getting Started
 
-## Api Key
+## ApiKey
 
-You will need to obtain an [apikey] from [Unstructured.io]
+You will need to obtain an [ApiKey] from [Unstructured]
 
-[apikey]: https://unstructured.io/#get-api-key
-[Unstructured.io]: https://unstructured.io
+[ApiKey]: https://unstructured.io/#get-api-key
+[Unstructured]: https://unstructured.io
 
 By default, an apikey is needed to make the client; however, individual requests can
-also be provided a separate apikey, which will override the default, when passed a header,
-see further below.
+also be provided a separate apikey, which will override the default, when passed a header.
 
 ## Instantiating the Client
 
-In addition to the `unstructured4s-core` module, you will need to provide an `sttp` backend, you can use any of the backends provided by [sttp] as long as you can provide a client with the effect capability `F[_]` that has a `Functor` instance (this will typical require some kind of interoperability module with the `cats` typeclass hierarchy)
+In addition to the `unstructured4s-core` module, you will need to provide an `sttp` backend, you can use any of the backends provided by [sttp] 
+as long as you can provide a client with the effect capability `F[_]` that has a `Functor` instance (this will typical require some kind of 
+interoperability module with the `cats` typeclass hierarchy)
 
 [sttp]: https://sttp.softwaremill.com/en/latest/backends/summary.html
 
 
 <br/>
-First obtain the necessary dependencies for `sttp`, here are the ones for `ZIO`:
+
+First obtain the necessary dependencies for sttp, here are the ones for `ZIO`:
 
 
 @@dependency[sbt,Maven,Gradle] {
@@ -28,6 +30,7 @@ First obtain the necessary dependencies for `sttp`, here are the ones for `ZIO`:
 }
 
 <br/>
+
 Here is the one for the `fs2` backend:
 
 
