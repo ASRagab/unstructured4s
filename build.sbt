@@ -45,8 +45,8 @@ lazy val core = (project in file("core"))
   .settings(
     commonSettings,
     name := "unstructured4s-core",
-    libraryDependencies ++= Dependencies.core
-    // mimaPreviousArtifacts := previousStableVersion.value.map(organization.value %% name.value % _).toSet,
+    libraryDependencies ++= Dependencies.core,
+    mimaPreviousArtifacts := previousStableVersion.value.map(organization.value %% name.value % _).toSet,
   )
 
 lazy val examples = (project in file("examples"))
