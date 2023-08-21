@@ -7,7 +7,8 @@ import sttp.client3.*
 import sttp.client3.circe.*
 import sttp.model.*
 
-class Unstructured4s[F[_]: Functor, P](backend: SttpBackend[F, P], apiKey: ApiKey):
+class Unstructured4s[F[_]: Functor, P](backend: SttpBackend[F, P], apiKey: ApiKey)
+    extends Unstructured4sAlg[F, PartitionResponse]:
   def partition(
       file: UnstructuredFile,
       request: Unstructured4sRequestFields = GeneralRequestFields(),
@@ -55,8 +56,8 @@ class Unstructured4s[F[_]: Functor, P](backend: SttpBackend[F, P], apiKey: ApiKe
 end Unstructured4s
 
 object Unstructured4s:
-  def make[F[_]: Monad, P](backend: SttpBackend[F, P], apiKey: ApiKey): F[Unstructured4s[F, P]] =
-    summon[Monad[F]].pure(Unstructured4s(backend, apiKey))
+  def make[F[_]: Functor, P](backend: SttpBackend[F, P], apiKey: ApiKey): Unstructured4s[F, P] =
+    Unstructured4s(backend, apiKey)
 
   def apiKeyHeader(apiKey: ApiKey): Header = Header("unstructured-api-key", apiKey)
 

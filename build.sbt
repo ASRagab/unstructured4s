@@ -35,7 +35,9 @@ lazy val unstructured4s = (project in file("."))
           uri("https://fosstodon.org/@traversable")
         ),
     Compile / paradoxProperties ++= Map(
-      "snip.core.base_dir" -> ((ThisBuild / baseDirectory).value / "core").getAbsolutePath
+      "snip.core.base_dir" -> ((ThisBuild / baseDirectory).value / "core").getAbsolutePath,
+      "sttp.version"       -> V.sttp,
+      "zio_cats.version"   -> V.zioCats
     ),
     paradox / sourceDirectory        := sourceDirectory.value / "paradox",
     git.remoteRepo                   := scmInfo.value.get.connection.replace("scm:git:", ""),

@@ -14,7 +14,7 @@ also be provided a separate apikey, which will override the default, when passed
 
 In addition to the `unstructured4s-core` module, you will need to provide an `sttp` backend, you can use any of the backends provided by [sttp] 
 as long as you can provide a client with the effect capability `F[_]` that has a `Functor` instance (this will typical require some kind of 
-interoperability module with the `cats` typeclass hierarchy)
+interoperability module with the `cats` typeclass hierarchy if you aren't using cats-effect)
 
 [sttp]: https://sttp.softwaremill.com/en/latest/backends/summary.html
 
@@ -25,8 +25,8 @@ First obtain the necessary dependencies for sttp, here are the ones for `ZIO`:
 
 
 @@dependency[sbt,Maven,Gradle] {
-    group="com.softwaremill.sttp.client3" artifact="async-http-client-backend-zio_3" version="latest"
-    group2="dev.zio" artifact2="zio-interop-cats_3" version2="latest"
+    group="com.softwaremill.sttp.client3" artifact="async-http-client-backend-zio_3" version="$sttp.version$"
+    group2="dev.zio" artifact2="zio-interop-cats_3" version2="$zio_cats.version$"
 }
 
 <br/>
@@ -37,7 +37,7 @@ Here is the one for the `fs2` backend:
 @@dependency[sbt,Maven,Gradle] {
     group="com.softwaremill.sttp.client3" 
     artifact="async-http-client-backend-fs2_3"
-    version="latest"
+    version="$sttp.version$"
 }
 
 
@@ -76,7 +76,8 @@ object ZIOApp extends ZIOAppDefault {
   def program: ZIO[SttpClient, Throwable, Unit] =
     for {
       backend <- ZIO.service[SttpClient]
-      _       <- Unstructured4s.make(backend, ApiKey(apiKey))
+      apiKey  <- ZIO.fromEither(apiKeyEnv)
+      client  = Unstructured4s.make(backend, ApiKey(apiKey))
     } yield ()
 }
 ```
@@ -110,7 +111,8 @@ object CatsEffectApp extends IOApp.Simple {
   override def run: IO[Unit] =
     backendResource.use { backend =>
       for {
-        client <- Unstructured4s.make(backend, ApiKey(apiKey))
+        apiKey <- IO.fromEither(apiKeyEnv)
+        client = Unstructured4s.make(backend, ApiKey(apiKey))
       } yield ()
     }
 ```

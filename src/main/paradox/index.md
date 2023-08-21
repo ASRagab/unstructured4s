@@ -16,11 +16,11 @@ The library is published to [Sonatype] and [Maven Central].
 
 <br/>
 
-See the @link:[Unstructured4s Examples](https://github.com/ASRagab/unstructured4s/tree/main/examples/src/main/scala/org/twelvehart/unstructured4s/examples) { open=new } for an even quicker start.
+See the @link:[Unstructured4s examples] { open=new } for an even quicker start.
 
 [Sonatype]: https://s01.oss.sonatype.org/content/repositories/releases/org/twelvehart/unstructured4s-core_3/
 [Maven Central]: https://search.maven.org/artifact/org/twelvehart/unstructured4s-core_3
-
+[Unstructured4s examples]: https://github.com/ASRagab/unstructured4s/tree/main/examples/src/main/scala/org/twelvehart/unstructured4s/examples
 
 @@@ index
 

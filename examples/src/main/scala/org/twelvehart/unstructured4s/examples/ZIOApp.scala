@@ -30,13 +30,13 @@ object ZIOApp extends ZIOAppDefault:
   private def program: ZIO[SttpClient, Throwable, Unit] =
     ZIO.scoped {
       for
-        apiKey             <- ZIO.fromEither(apiKeyEnv)
-        files              <- ZIO.fromEither(filesEither)
-        backend            <- ZIO.service[SttpClient]
-        unstructuredClient <- Unstructured4s.make(backend, ApiKey(apiKey))
-        response           <- unstructuredClient.partitionMultiple(files)
-        result              = response.result.bimap(_.getMessage, _.mkString("\n")).merge
-        _                  <- Console.printLine(result)
+        apiKey            <- ZIO.fromEither(apiKeyEnv)
+        files             <- ZIO.fromEither(filesEither)
+        backend           <- ZIO.service[SttpClient]
+        unstructuredClient = Unstructured4s.make(backend, ApiKey(apiKey))
+        response          <- unstructuredClient.partitionMultiple(files)
+        result             = response.result.bimap(_.getMessage, _.mkString("\n")).merge
+        _                 <- Console.printLine(result)
       yield ()
     }
 

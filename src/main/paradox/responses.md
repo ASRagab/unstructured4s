@@ -29,7 +29,7 @@ which depends on whether you called `partition` or `partitionMultiple` respectiv
 There exists an implicit conversion between this error type and `ResponseException[String, io.circe.Error]` which is 
 error return type from `sttp` there are two kinds of `Unstructured4sError`s
 
-* `JsonParsingError` - This is returned when the response from the [Unstructured] is not valid json.
+* `JsonParsingError` - This is returned when the response from [Unstructured] is not valid json.
 * `HttpResponseError` - This is returned when the response is not `200 OK`.
 
 
