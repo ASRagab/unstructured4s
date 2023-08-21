@@ -14,19 +14,22 @@ object Dependencies {
   lazy val scalaTest  = "org.scalatest"  %% "scalatest"  % "3.2.16" % Test
   lazy val scalaCheck = "org.scalacheck" %% "scalacheck" % "1.17.0" % Test
 
-  lazy val sttpFs2     = "com.softwaremill.sttp.client3" %% "fs2"                           % V.sttp
-  lazy val sttpSlf4j   = "com.softwaremill.sttp.client3" %% "slf4j-backend"                 % V.sttp
-  lazy val sttpCirce   = "com.softwaremill.sttp.client3" %% "circe"                         % V.sttp
-  lazy val sttpZio     = "com.softwaremill.sttp.client3" %% "async-http-client-backend-zio" % V.sttp
+  lazy val sttpFs2   = "com.softwaremill.sttp.client3" %% "fs2"                           % V.sttp
+  lazy val sttpSlf4j = "com.softwaremill.sttp.client3" %% "slf4j-backend"                 % V.sttp
+  lazy val sttpCirce = "com.softwaremill.sttp.client3" %% "circe"                         % V.sttp
+  lazy val sttpZio   = "com.softwaremill.sttp.client3" %% "async-http-client-backend-zio" % V.sttp
 
   lazy val circe        = "io.circe" %% "circe-core"    % V.circe
   lazy val circeGeneric = "io.circe" %% "circe-generic" % V.circe
   lazy val circeParser  = "io.circe" %% "circe-parser"  % V.circe
 
-  lazy val zioTest    = "dev.zio" %% "zio-test"         % V.zio
-  lazy val zio        = "dev.zio" %% "zio"              % V.zio
-  lazy val zioTestSbt = "dev.zio" %% "zio-test-sbt"     % V.zio
-  lazy val zioCats    = "dev.zio" %% "zio-interop-cats" % "23.0.0.5"
+  lazy val zioTest    = "dev.zio" %% "zio-test"          % V.zio
+  lazy val zio        = "dev.zio" %% "zio"               % V.zio
+  lazy val zioTestSbt = "dev.zio" %% "zio-test-sbt"      % V.zio
+  lazy val zioCats    = "dev.zio" %% "zio-interop-cats"  % "23.0.0.5"
+  lazy val zioSlf4j   = "dev.zio" %% "zio-logging-slf4j" % "2.1.14"
+
+  lazy val loggingFrontend = "ch.qos.logback" % "logback-classic" % "1.4.7"
 
   lazy val core: Seq[ModuleID] = Seq(
     cats,
@@ -48,6 +51,8 @@ object Dependencies {
     sttpSlf4j,
     sttpZio,
     sttpFs2,
-    scalaTest
+    scalaTest,
+    loggingFrontend,
+    zioSlf4j
   )
 }

@@ -1,3 +1,5 @@
+import org.typelevel.scalacoptions.ScalacOptions
+
 Global / onChangedBuildSource := ReloadOnSourceChanges
 
 ThisBuild / scalaVersion := "3.3.0"
@@ -6,24 +8,12 @@ ThisBuild / mimaFailOnNoPrevious := false
 
 ThisBuild / envFileName := ".envrc"
 
+lazy val commonSettings = Seq(
+  Test / tpolecatExcludeOptions += ScalacOptions.warnNonUnitStatement
+)
+
 addCommandAlias("prepare", "scalafmtAll;test")
 addCommandAlias("pushSite", ";project unstructured4s;ghPagesCacheClear;ghpagesPushSite")
-
-lazy val commonOptions =
-  Seq(
-    "-Xfatal-warnings",
-    "-source:future",
-    "-Ykind-projector:underscores",
-    "-Xmax-inlines",
-    "100",
-    "-deprecation",
-    "-feature",
-    "-language:implicitConversions"
-  )
-
-val commonSettings = Seq(
-  scalacOptions ++= commonOptions
-)
 
 lazy val unstructured4s = (project in file("."))
   .enablePlugins(ParadoxSitePlugin, SitePreviewPlugin, ParadoxMaterialThemePlugin, SiteScaladocPlugin, GhpagesPlugin)
@@ -42,8 +32,12 @@ lazy val unstructured4s = (project in file("."))
           uri("https://bsky.app/profile/traversable.bsky.social"),
           uri("https://fosstodon.org/@traversable")
         ),
+    Compile / paradoxProperties ++= Map(
+      "snip.core.base_dir" -> ((ThisBuild / baseDirectory).value / "core").getAbsolutePath
+    ),
     paradox / sourceDirectory      := sourceDirectory.value / "paradox",
-    git.remoteRepo                 := scmInfo.value.get.connection.replace("scm:git:", "")
+    git.remoteRepo                 := scmInfo.value.get.connection.replace("scm:git:", ""),
+    Test / tpolecatExcludeOptions += ScalacOptions.warnNonUnitStatement
   )
   .aggregate(core, examples)
 
@@ -52,7 +46,7 @@ lazy val core = (project in file("core"))
     commonSettings,
     name := "unstructured4s-core",
     libraryDependencies ++= Dependencies.core
-//    mimaPreviousArtifacts := previousStableVersion.value.map(organization.value %% name.value % _).toSet,
+    // mimaPreviousArtifacts := previousStableVersion.value.map(organization.value %% name.value % _).toSet,
   )
 
 lazy val examples = (project in file("examples"))
