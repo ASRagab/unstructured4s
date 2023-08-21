@@ -2,7 +2,11 @@ name: Release
 on:
   push:
     branches: [main]
-    tags: ["*"]
+    tags: ["v*"]
+
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 
 permissions:
   contents: write
@@ -26,6 +30,8 @@ jobs:
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
   publishSite:
+    needs: publish
+    if: startsWith(github.event.ref, 'refs/tags/v')
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
