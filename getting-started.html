@@ -148,7 +148,7 @@ ASRagab/unstructured4s
 <ul>
   <li><a href="getting-started.html#getting-started" class="header">Getting Started</a>
   <ul>
-    <li><a href="getting-started.html#api-key" class="header">Api Key</a></li>
+    <li><a href="getting-started.html#apikey" class="header">ApiKey</a></li>
     <li><a href="getting-started.html#instantiating-the-client" class="header">Instantiating the Client</a></li>
   </ul></li>
 </ul>
@@ -158,7 +158,7 @@ ASRagab/unstructured4s
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 0.1.2
+<i class="md-icon" title="Version">label_outline</i> 0.1.3
 </label>
 </li>
 </ul>
@@ -173,7 +173,7 @@ ASRagab/unstructured4s
 <ul>
   <li><a href="getting-started.html#getting-started" class="header">Getting Started</a>
   <ul>
-    <li><a href="getting-started.html#api-key" class="header">Api Key</a></li>
+    <li><a href="getting-started.html#apikey" class="header">ApiKey</a></li>
     <li><a href="getting-started.html#instantiating-the-client" class="header">Instantiating the Client</a></li>
   </ul></li>
 </ul>
@@ -186,13 +186,13 @@ ASRagab/unstructured4s
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
 <h1><a href="#getting-started" name="getting-started" class="anchor"><span class="anchor-link"></span></a>Getting Started</h1>
-<h2><a href="#api-key" name="api-key" class="anchor"><span class="anchor-link"></span></a>Api Key</h2>
-<p>You will need to obtain an <a href="https://unstructured.io/#get-api-key">apikey</a> from <a href="https://unstructured.io">Unstructured.io</a></p>
-<p>By default, an apikey is needed to make the client; however, individual requests can also be provided a separate apikey, which will override the default, when passed a header, see further below.</p>
+<h2><a href="#apikey" name="apikey" class="anchor"><span class="anchor-link"></span></a>ApiKey</h2>
+<p>You will need to obtain an <a href="https://unstructured.io/#get-api-key">ApiKey</a> from <a href="https://unstructured.io">Unstructured</a></p>
+<p>By default, an apikey is needed to make the client; however, individual requests can also be provided a separate apikey, which will override the default, when passed a header.</p>
 <h2><a href="#instantiating-the-client" name="instantiating-the-client" class="anchor"><span class="anchor-link"></span></a>Instantiating the Client</h2>
 <p>In addition to the <code>unstructured4s-core</code> module, you will need to provide an <code>sttp</code> backend, you can use any of the backends provided by <a href="https://sttp.softwaremill.com/en/latest/backends/summary.html">sttp</a> as long as you can provide a client with the effect capability <code>F[_]</code> that has a <code>Functor</code> instance (this will typical require some kind of interoperability module with the <code>cats</code> typeclass hierarchy)</p>
 <br/>
-<p>First obtain the necessary dependencies for <code>sttp</code>, here are the ones for <code>ZIO</code>:</p><dl class="dependency"><dt>sbt</dt><dd><pre class="prettyprint"><code class="language-scala">libraryDependencies ++= Seq(
+<p>First obtain the necessary dependencies for sttp, here are the ones for <code>ZIO</code>:</p><dl class="dependency"><dt>sbt</dt><dd><pre class="prettyprint"><code class="language-scala">libraryDependencies ++= Seq(
   "com.softwaremill.sttp.client3" %% "async-http-client-backend-zio" % "latest",
   "dev.zio" %% "zio-interop-cats" % "latest"
 )</code></pre></dd><dt>Maven</dt><dd><pre class="prettyprint"><code class="language-xml">&lt;dependencies&gt
@@ -284,13 +284,13 @@ object CatsEffectApp extends IOApp.Simple {
 </code></pre>
 </div>
 <div>
-<a href="https://github.com/ASRagab/unstructured4s/tree/v0.1.2/src/main/paradox/getting-started.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/ASRagab/unstructured4s/tree/v0.1.3/src/main/paradox/getting-started.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-0.1.2
+0.1.3
 </span>
 </div>
 </article>
