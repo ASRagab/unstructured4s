@@ -23,8 +23,8 @@ First obtain the necessary dependencies for `sttp`, here are the ones for `ZIO`:
 
 
 @@dependency[sbt,Maven,Gradle] {
-    group="com.softwaremill.sttp.client3" artifact="async-http-client-backend-zio" version="latest"
-    group2="dev.zio" artifact2="zio-interop-cats" version2="latest"
+    group="com.softwaremill.sttp.client3" artifact="async-http-client-backend-zio_3" version="latest"
+    group2="dev.zio" artifact2="zio-interop-cats_3" version2="latest"
 }
 
 <br/>
@@ -33,7 +33,7 @@ Here is the one for the `fs2` backend:
 
 @@dependency[sbt,Maven,Gradle] {
     group="com.softwaremill.sttp.client3" 
-    artifact="async-http-client-backend-fs2"
+    artifact="async-http-client-backend-fs2_3"
     version="latest"
 }
 

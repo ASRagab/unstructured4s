@@ -10,7 +10,7 @@ The library is published to [Sonatype] and [Maven Central].
 
 @@dependency[sbt,Maven,Gradle] {
     group="org.twelvehart" 
-    artifact="unstructured4s-core"
+    artifact="unstructured4s-core_3"
     version="$project.version$"
 }
 
