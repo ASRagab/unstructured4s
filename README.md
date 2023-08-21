@@ -5,4 +5,4 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # unstructured4s
-unstructured4s: An API wrapper for Unstructured.io
+unstructured4s: A Scala 3 wrapper for Unstructured.io
