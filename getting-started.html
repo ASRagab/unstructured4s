@@ -158,7 +158,7 @@ ASRagab/unstructured4s
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 0.1.0
+<i class="md-icon" title="Version">label_outline</i> 0.1.0+1-138439e5*
 </label>
 </li>
 </ul>
@@ -193,32 +193,32 @@ ASRagab/unstructured4s
 <p>In addition to the <code>unstructured4s-core</code> module, you will need to provide an <code>sttp</code> backend, you can use any of the backends provided by <a href="https://sttp.softwaremill.com/en/latest/backends/summary.html">sttp</a> as long as you can provide a client with the effect capability <code>F[_]</code> that has a <code>Functor</code> instance (this will typical require some kind of interoperability module with the <code>cats</code> typeclass hierarchy)</p>
 <br/>
 <p>First obtain the necessary dependencies for <code>sttp</code>, here are the ones for <code>ZIO</code>:</p><dl class="dependency"><dt>sbt</dt><dd><pre class="prettyprint"><code class="language-scala">libraryDependencies ++= Seq(
-  "com.softwaremill.sttp.client3" % "async-http-client-backend-zio" % "latest",
-  "dev.zio" % "zio-interop-cats" % "latest"
+  "com.softwaremill.sttp.client3" %% "async-http-client-backend-zio" % "latest",
+  "dev.zio" %% "zio-interop-cats" % "latest"
 )</code></pre></dd><dt>Maven</dt><dd><pre class="prettyprint"><code class="language-xml">&lt;dependencies&gt
   &lt;dependency&gt;
     &lt;groupId&gt;com.softwaremill.sttp.client3&lt;/groupId&gt;
-    &lt;artifactId&gt;async-http-client-backend-zio&lt;/artifactId&gt;
+    &lt;artifactId&gt;async-http-client-backend-zio_3&lt;/artifactId&gt;
     &lt;version&gt;latest&lt;/version&gt;
   &lt;/dependency&gt
   &lt;dependency&gt;
     &lt;groupId&gt;dev.zio&lt;/groupId&gt;
-    &lt;artifactId&gt;zio-interop-cats&lt;/artifactId&gt;
+    &lt;artifactId&gt;zio-interop-cats_3&lt;/artifactId&gt;
     &lt;version&gt;latest&lt;/version&gt;
   &lt;/dependency&gt
 &lt;/dependencies&gt;</code></pre></dd><dt>Gradle</dt><dd><pre class="prettyprint"><code class="language-gradle">dependencies {
-  implementation "com.softwaremill.sttp.client3:async-http-client-backend-zio:latest"
-  implementation "dev.zio:zio-interop-cats:latest"
+  implementation "com.softwaremill.sttp.client3:async-http-client-backend-zio_3:latest"
+  implementation "dev.zio:zio-interop-cats_3:latest"
 }</code></pre></dd></dl>
 <br/>
-<p>Here is the one for the <code>fs2</code> backend:</p><dl class="dependency"><dt>sbt</dt><dd><pre class="prettyprint"><code class="language-scala">libraryDependencies += "com.softwaremill.sttp.client3" % "async-http-client-backend-fs2" % "latest"</code></pre></dd><dt>Maven</dt><dd><pre class="prettyprint"><code class="language-xml">&lt;dependencies&gt
+<p>Here is the one for the <code>fs2</code> backend:</p><dl class="dependency"><dt>sbt</dt><dd><pre class="prettyprint"><code class="language-scala">libraryDependencies += "com.softwaremill.sttp.client3" %% "async-http-client-backend-fs2" % "latest"</code></pre></dd><dt>Maven</dt><dd><pre class="prettyprint"><code class="language-xml">&lt;dependencies&gt
   &lt;dependency&gt;
     &lt;groupId&gt;com.softwaremill.sttp.client3&lt;/groupId&gt;
-    &lt;artifactId&gt;async-http-client-backend-fs2&lt;/artifactId&gt;
+    &lt;artifactId&gt;async-http-client-backend-fs2_3&lt;/artifactId&gt;
     &lt;version&gt;latest&lt;/version&gt;
   &lt;/dependency&gt
 &lt;/dependencies&gt;</code></pre></dd><dt>Gradle</dt><dd><pre class="prettyprint"><code class="language-gradle">dependencies {
-  implementation "com.softwaremill.sttp.client3:async-http-client-backend-fs2:latest"
+  implementation "com.softwaremill.sttp.client3:async-http-client-backend-fs2_3:latest"
 }</code></pre></dd></dl>
 <br/>
 <p>To instantiate the client, first include these imports:</p>
@@ -284,13 +284,13 @@ object CatsEffectApp extends IOApp.Simple {
 </code></pre>
 </div>
 <div>
-<a href="https://github.com/ASRagab/unstructured4s/tree/v0.1.0/src/main/paradox/getting-started.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/ASRagab/unstructured4s/tree/master/src/main/paradox/getting-started.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-0.1.0
+0.1.0+1-138439e5*
 </span>
 </div>
 </article>
