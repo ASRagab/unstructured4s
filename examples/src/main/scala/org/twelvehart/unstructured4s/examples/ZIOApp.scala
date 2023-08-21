@@ -20,8 +20,9 @@ object ZIOApp extends ZIOAppDefault:
         .map(backend =>
           Slf4jLoggingBackend(
             backend,
-            logRequestHeaders = false,
-            logRequestBody = true
+            logRequestHeaders = true,
+            logRequestBody = true,
+            sensitiveHeaders = Set("unstructured-api-key")
           )
         )
     }
