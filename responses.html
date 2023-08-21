@@ -20,7 +20,7 @@
 
 <meta name="description" content="Unstructured4s is a Scala library for working with unstructured.io API">
 <link rel="shortcut icon" href="assets/images/favicon.png">
-<title>Unstructured4s</title>
+<title>Responses · Unstructured4s</title>
 <link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
 <link rel="stylesheet" href="assets/stylesheets/application-palette.22915126.css">
 <meta name="theme-color" content="#546e7a" />
@@ -56,7 +56,12 @@ data-md-color-accent="orange"
 </div>
 <div class="md-flex__cell md-flex__cell--stretch">
 <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+<span class="md-header-nav__topic">
 Unstructured4s
+</span>
+<span class="md-header-nav__topic">
+Responses
+</span>
 </div>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
@@ -136,14 +141,16 @@ ASRagab/unstructured4s
 <ul>
   <li><a href="getting-started.html" class="page">Getting Started</a></li>
   <li><a href="making-requests.html" class="page">Making Requests</a></li>
-  <li><a href="responses.html" class="page">Responses</a></li>
+  <li><a href="responses.html" class="active page">Responses</a></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
 <label class="md-nav__title" for="__toc">Table of contents</label>
 <ul>
-  <li><a href="index.html#unstructured4s" class="header">Unstructured4s</a>
+  <li><a href="responses.html#responses" class="header">Responses</a>
   <ul>
-    <li><a href="index.html#setup" class="header">Setup</a></li>
+    <li><a href="responses.html#partitionresponse" class="header">PartitionResponse</a></li>
+    <li><a href="responses.html#unstructured4sresponse" class="header">Unstructured4sResponse</a></li>
+    <li><a href="responses.html#unstructured4serror" class="header">Unstructured4sError</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -165,9 +172,11 @@ ASRagab/unstructured4s
 <nav class="md-nav md-nav--secondary">
 <label class="md-nav__title" for="__toc">Table of contents</label>
 <ul>
-  <li><a href="index.html#unstructured4s" class="header">Unstructured4s</a>
+  <li><a href="responses.html#responses" class="header">Responses</a>
   <ul>
-    <li><a href="index.html#setup" class="header">Setup</a></li>
+    <li><a href="responses.html#partitionresponse" class="header">PartitionResponse</a></li>
+    <li><a href="responses.html#unstructured4sresponse" class="header">Unstructured4sResponse</a></li>
+    <li><a href="responses.html#unstructured4serror" class="header">Unstructured4sError</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -178,23 +187,27 @@ ASRagab/unstructured4s
 <div class="md-content">
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
-<h1><a href="#unstructured4s" name="unstructured4s" class="anchor"><span class="anchor-link"></span></a>Unstructured4s</h1>
-<p>A Scala 3 library that wraps the <a href="https://unstructured.io">Unstructured</a> API.</p>
-<h2><a href="#setup" name="setup" class="anchor"><span class="anchor-link"></span></a>Setup</h2>
-<p>The library is published to <a href="https://s01.oss.sonatype.org/content/repositories/releases/org/twelvehart/unstructured4s-core_3/">Sonatype</a> and <a href="https://search.maven.org/artifact/org/twelvehart/unstructured4s-core_3">Maven Central</a>.</p><dl class="dependency"><dt>sbt</dt><dd><pre class="prettyprint"><code class="language-scala">libraryDependencies += "org.twelvehart" % "unstructured4s-core" % "0.0.0+6-286f6bcb-SNAPSHOT"</code></pre></dd><dt>Maven</dt><dd><pre class="prettyprint"><code class="language-xml">&lt;dependencies&gt
-  &lt;dependency&gt;
-    &lt;groupId&gt;org.twelvehart&lt;/groupId&gt;
-    &lt;artifactId&gt;unstructured4s-core&lt;/artifactId&gt;
-    &lt;version&gt;0.0.0+6-286f6bcb-SNAPSHOT&lt;/version&gt;
-  &lt;/dependency&gt
-&lt;/dependencies&gt;</code></pre></dd><dt>Gradle</dt><dd><pre class="prettyprint"><code class="language-gradle">dependencies {
-  implementation "org.twelvehart:unstructured4s-core:0.0.0+6-286f6bcb-SNAPSHOT"
-}</code></pre></dd></dl>
+<h1><a href="#responses" name="responses" class="anchor"><span class="anchor-link"></span></a>Responses</h1>
+<p>Every method on the <code>Unstructured4s</code> client returns an <code>F[Unstructured4sResponse[A]]</code> where <code>F[_]</code> is the effect capability of your chosen backend.</p>
+<p>Requests to <a href="https://unstructured-io.github.io/unstructured/api.html">Unstructured.io</a> are multipart requests, the return type is always <code>json</code> despite the api allowing <code>text/csv</code> as well. This is likely to change in the future, but the recommended approach is to use the <code>json</code> response type.</p>
 <br/>
-<p>See the <a href="https://github.com/ASRagab/unstructured4s/tree/main/examples/src/main/scala/org/twelvehart/unstructured4s/examples" title="Unstructured4s Examples" target="_blank" rel="noopener noreferrer">Unstructured4s Examples</a> for an even quicker start.</p>
+<h2><a href="#partitionresponse" name="partitionresponse" class="anchor"><span class="anchor-link"></span></a>PartitionResponse</h2>
+<p>The <code>PartitionResponse</code> is a case class that represents the response from the <a href="https://unstructured-io.github.io/unstructured/api.html">Unstructured.io</a> for a single file.</p>
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/ASRagab/unstructured4s/tree/master/core/src/main/scala/org/twelvehart/unstructured4s/model/Unstructured4sResponse.scala#L8" target="_blank" title="Go to snippet source">source</a><code class="language-scala">case class PartitionResponse(`type`: String, elementId: String, metadata: Metadata, text: String)</code></pre>
+<br/>
+<h2><a href="#unstructured4sresponse" name="unstructured4sresponse" class="anchor"><span class="anchor-link"></span></a>Unstructured4sResponse</h2>
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/ASRagab/unstructured4s/tree/master/core/src/main/scala/org/twelvehart/unstructured4s/model/Unstructured4sResponse.scala#L41" target="_blank" title="Go to snippet source">source</a><code class="language-scala">case class Unstructured4sResponse[A](result: Either[Unstructured4sError, List[A]])</code></pre>
+<br/>
+<p>It wraps an <code>Either[Unstructured4sError, A]</code> where <code>A</code> is either a <code>PartitionResponse</code> or <code>List[PartitionResponse]</code> which depends on whether you called <code>partition</code> or <code>partitionMultiple</code> respectively.</p>
+<h2><a href="#unstructured4serror" name="unstructured4serror" class="anchor"><span class="anchor-link"></span></a>Unstructured4sError</h2>
+<p>There exists an implicit conversion between this and <code>ResponseException[String, io.circe.Error]</code> which is error return type from <code>sttp</code> there are two kinds of <code>Unstructured4sError</code>s</p>
+<ul>
+  <li><code>JsonParsingError</code> - This is returned when the response from the <a href="https://unstructured-io.github.io/unstructured/api.html">Unstructured.io</a> is not valid json.</li>
+  <li><code>HttpResponseError</code> - This is returned when the response is not 200 OK.</li>
+</ul>
 </div>
 <div>
-<a href="https://github.com/ASRagab/unstructured4s/tree/master/src/main/paradox/index.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/ASRagab/unstructured4s/tree/master/src/main/paradox/responses.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
@@ -210,17 +223,17 @@ Edit this page
 <footer class="md-footer">
 <div class="md-footer-nav">
 <nav class="md-footer-nav__inner md-grid">
-<a href="getting-started.html" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<a href="making-requests.html" title="Making Requests" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+</div>
 <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
 <span class="md-flex__ellipsis">
 <span class="md-footer-nav__direction">
-Next
+Previous
 </span>
-Getting Started
+Making Requests
 </span>
-</div>
-<div class="md-flex__cell md-flex__cell--shrink">
-<i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
 </div>
 </a>
 </nav>

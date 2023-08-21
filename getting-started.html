@@ -20,7 +20,7 @@
 
 <meta name="description" content="Unstructured4s is a Scala library for working with unstructured.io API">
 <link rel="shortcut icon" href="assets/images/favicon.png">
-<title>Unstructured4s</title>
+<title>Getting Started · Unstructured4s</title>
 <link rel="stylesheet" href="assets/stylesheets/application.451f80e5.css">
 <link rel="stylesheet" href="assets/stylesheets/application-palette.22915126.css">
 <meta name="theme-color" content="#546e7a" />
@@ -56,7 +56,12 @@ data-md-color-accent="orange"
 </div>
 <div class="md-flex__cell md-flex__cell--stretch">
 <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+<span class="md-header-nav__topic">
 Unstructured4s
+</span>
+<span class="md-header-nav__topic">
+Getting Started
+</span>
 </div>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
@@ -134,16 +139,17 @@ ASRagab/unstructured4s
 
 </div>
 <ul>
-  <li><a href="getting-started.html" class="page">Getting Started</a></li>
+  <li><a href="getting-started.html" class="active page">Getting Started</a></li>
   <li><a href="making-requests.html" class="page">Making Requests</a></li>
   <li><a href="responses.html" class="page">Responses</a></li>
 </ul>
 <nav class="md-nav md-nav--secondary">
 <label class="md-nav__title" for="__toc">Table of contents</label>
 <ul>
-  <li><a href="index.html#unstructured4s" class="header">Unstructured4s</a>
+  <li><a href="getting-started.html#getting-started" class="header">Getting Started</a>
   <ul>
-    <li><a href="index.html#setup" class="header">Setup</a></li>
+    <li><a href="getting-started.html#api-key" class="header">Api Key</a></li>
+    <li><a href="getting-started.html#instantiating-the-client" class="header">Instantiating the Client</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -165,9 +171,10 @@ ASRagab/unstructured4s
 <nav class="md-nav md-nav--secondary">
 <label class="md-nav__title" for="__toc">Table of contents</label>
 <ul>
-  <li><a href="index.html#unstructured4s" class="header">Unstructured4s</a>
+  <li><a href="getting-started.html#getting-started" class="header">Getting Started</a>
   <ul>
-    <li><a href="index.html#setup" class="header">Setup</a></li>
+    <li><a href="getting-started.html#api-key" class="header">Api Key</a></li>
+    <li><a href="getting-started.html#instantiating-the-client" class="header">Instantiating the Client</a></li>
   </ul></li>
 </ul>
 </nav>
@@ -178,23 +185,106 @@ ASRagab/unstructured4s
 <div class="md-content">
 <article class="md-content__inner md-typeset">
 <div class="md-content__searchable">
-<h1><a href="#unstructured4s" name="unstructured4s" class="anchor"><span class="anchor-link"></span></a>Unstructured4s</h1>
-<p>A Scala 3 library that wraps the <a href="https://unstructured.io">Unstructured</a> API.</p>
-<h2><a href="#setup" name="setup" class="anchor"><span class="anchor-link"></span></a>Setup</h2>
-<p>The library is published to <a href="https://s01.oss.sonatype.org/content/repositories/releases/org/twelvehart/unstructured4s-core_3/">Sonatype</a> and <a href="https://search.maven.org/artifact/org/twelvehart/unstructured4s-core_3">Maven Central</a>.</p><dl class="dependency"><dt>sbt</dt><dd><pre class="prettyprint"><code class="language-scala">libraryDependencies += "org.twelvehart" % "unstructured4s-core" % "0.0.0+6-286f6bcb-SNAPSHOT"</code></pre></dd><dt>Maven</dt><dd><pre class="prettyprint"><code class="language-xml">&lt;dependencies&gt
+<h1><a href="#getting-started" name="getting-started" class="anchor"><span class="anchor-link"></span></a>Getting Started</h1>
+<h2><a href="#api-key" name="api-key" class="anchor"><span class="anchor-link"></span></a>Api Key</h2>
+<p>You will need to obtain an <a href="https://unstructured.io/#get-api-key">apikey</a> from <a href="https://unstructured.io">Unstructured.io</a></p>
+<p>By default, an apikey is needed to make the client; however, individual requests can also be provided a separate apikey, which will override the default, when passed a header, see further below.</p>
+<h2><a href="#instantiating-the-client" name="instantiating-the-client" class="anchor"><span class="anchor-link"></span></a>Instantiating the Client</h2>
+<p>In addition to the <code>unstructured4s-core</code> module, you will need to provide an <code>sttp</code> backend, you can use any of the backends provided by <a href="https://sttp.softwaremill.com/en/latest/backends/summary.html">sttp</a> as long as you can provide a client with the effect capability <code>F[_]</code> that has a <code>Functor</code> instance (this will typical require some kind of interoperability module with the <code>cats</code> typeclass hierarchy)</p>
+<br/>
+<p>First obtain the necessary dependencies for <code>sttp</code>, here are the ones for <code>ZIO</code>:</p><dl class="dependency"><dt>sbt</dt><dd><pre class="prettyprint"><code class="language-scala">libraryDependencies ++= Seq(
+  "com.softwaremill.sttp.client3" % "async-http-client-backend-zio" % "latest",
+  "dev.zio" % "zio-interop-cats" % "latest"
+)</code></pre></dd><dt>Maven</dt><dd><pre class="prettyprint"><code class="language-xml">&lt;dependencies&gt
   &lt;dependency&gt;
-    &lt;groupId&gt;org.twelvehart&lt;/groupId&gt;
-    &lt;artifactId&gt;unstructured4s-core&lt;/artifactId&gt;
-    &lt;version&gt;0.0.0+6-286f6bcb-SNAPSHOT&lt;/version&gt;
+    &lt;groupId&gt;com.softwaremill.sttp.client3&lt;/groupId&gt;
+    &lt;artifactId&gt;async-http-client-backend-zio&lt;/artifactId&gt;
+    &lt;version&gt;latest&lt;/version&gt;
+  &lt;/dependency&gt
+  &lt;dependency&gt;
+    &lt;groupId&gt;dev.zio&lt;/groupId&gt;
+    &lt;artifactId&gt;zio-interop-cats&lt;/artifactId&gt;
+    &lt;version&gt;latest&lt;/version&gt;
   &lt;/dependency&gt
 &lt;/dependencies&gt;</code></pre></dd><dt>Gradle</dt><dd><pre class="prettyprint"><code class="language-gradle">dependencies {
-  implementation "org.twelvehart:unstructured4s-core:0.0.0+6-286f6bcb-SNAPSHOT"
+  implementation "com.softwaremill.sttp.client3:async-http-client-backend-zio:latest"
+  implementation "dev.zio:zio-interop-cats:latest"
 }</code></pre></dd></dl>
 <br/>
-<p>See the <a href="https://github.com/ASRagab/unstructured4s/tree/main/examples/src/main/scala/org/twelvehart/unstructured4s/examples" title="Unstructured4s Examples" target="_blank" rel="noopener noreferrer">Unstructured4s Examples</a> for an even quicker start.</p>
+<p>Here is the one for the <code>fs2</code> backend:</p><dl class="dependency"><dt>sbt</dt><dd><pre class="prettyprint"><code class="language-scala">libraryDependencies += "com.softwaremill.sttp.client3" % "async-http-client-backend-fs2" % "latest"</code></pre></dd><dt>Maven</dt><dd><pre class="prettyprint"><code class="language-xml">&lt;dependencies&gt
+  &lt;dependency&gt;
+    &lt;groupId&gt;com.softwaremill.sttp.client3&lt;/groupId&gt;
+    &lt;artifactId&gt;async-http-client-backend-fs2&lt;/artifactId&gt;
+    &lt;version&gt;latest&lt;/version&gt;
+  &lt;/dependency&gt
+&lt;/dependencies&gt;</code></pre></dd><dt>Gradle</dt><dd><pre class="prettyprint"><code class="language-gradle">dependencies {
+  implementation "com.softwaremill.sttp.client3:async-http-client-backend-fs2:latest"
+}</code></pre></dd></dl>
+<br/>
+<p>To instantiate the client, first include these imports:</p>
+<pre class="prettyprint"><code class="language-scala">import org.twelvehart.unstructured4s.*
+import org.twelvehart.unstructured4s.model.*
+import sttp.client3.*
+</code></pre>
+<p>Next, declare the backend and retrieve the apikey from the environment:</p>
+<pre class="prettyprint"><code class="language-scala">object BasicApp extends App {
+  private val backend = HttpClientSyncBackend()
+  private val client = Unstructured4s.make(backend, ApiKey(apiKey))
+}
+</code></pre>
+<br/>
+<p>For <code>ZIO</code> you will likely be making a <code>ZLayer</code>:</p>
+<pre class="prettyprint"><code class="language-scala">import zio.*
+import zio.interop.catz.*
+import org.twelvehart.unstructured4s.*
+import org.twelvehart.unstructured4s.model.*
+import sttp.client3.asynchttpclient.zio.*
+import sttp.client3.*
+
+object ZIOApp extends ZIOAppDefault {
+  private val live = AsyncHttpClientZioBackend.layer()
+
+  def program: ZIO[SttpClient, Throwable, Unit] =
+    for {
+      backend &lt;- ZIO.service[SttpClient]
+      _       &lt;- Unstructured4s.make(backend, ApiKey(apiKey))
+    } yield ()
+}
+</code></pre>
+<br/>
+<p>For <code>fs2</code> you will likely be making a <code>cats.effect.Resource</code>:</p>
+<pre class="prettyprint"><code class="language-scala">import cats.effect.*
+import org.twelvehart.unstructured4s.*
+import org.twelvehart.unstructured4s.model.*
+import sttp.capabilities
+import sttp.capabilities.fs2.Fs2Streams
+import sttp.client3.SttpBackend
+import sttp.client3.httpclient.fs2.HttpClientFs2Backend
+import sttp.client3.logging.slf4j.Slf4jLoggingBackend
+
+object CatsEffectApp extends IOApp.Simple {
+  private val backendResource: Resource[IO, SttpBackend[IO, Fs2Streams[IO] &amp; capabilities.WebSockets]] =
+    HttpClientFs2Backend
+      .resource[IO]()
+      .map(backend =&gt;
+        // You can even use logged backends as an example
+        Slf4jLoggingBackend(
+          backend,
+          logRequestHeaders = false,
+          logRequestBody = true
+        )
+      )
+
+  override def run: IO[Unit] =
+    backendResource.use { backend =&gt;
+      for {
+        client &lt;- Unstructured4s.make(backend, ApiKey(apiKey))
+      } yield ()
+    }
+</code></pre>
 </div>
 <div>
-<a href="https://github.com/ASRagab/unstructured4s/tree/master/src/main/paradox/index.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/ASRagab/unstructured4s/tree/master/src/main/paradox/getting-started.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
@@ -210,13 +300,26 @@ Edit this page
 <footer class="md-footer">
 <div class="md-footer-nav">
 <nav class="md-footer-nav__inner md-grid">
-<a href="getting-started.html" title="Getting Started" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+<a href="index.html" title="Unstructured4s" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+<div class="md-flex__cell md-flex__cell--shrink">
+<i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+</div>
+<div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+<span class="md-flex__ellipsis">
+<span class="md-footer-nav__direction">
+Previous
+</span>
+Unstructured4s
+</span>
+</div>
+</a>
+<a href="making-requests.html" title="Making Requests" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
 <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
 <span class="md-flex__ellipsis">
 <span class="md-footer-nav__direction">
 Next
 </span>
-Getting Started
+Making Requests
 </span>
 </div>
 <div class="md-flex__cell md-flex__cell--shrink">
