@@ -21,10 +21,14 @@ A hopefully sensible default with all necessary parameters for each is provided 
 
 <br/>
 
+### `GeneralRequestFields`
+
 @@snip [domain.scala]($core$/src/main/scala/org/twelvehart/unstructured4s/model/domain.scala) { #general_request_fields }
 
 
 <br/>
+
+### `HiResRequestFields`
 
 @@snip [domain.scala]($core$/src/main/scala/org/twelvehart/unstructured4s/model/domain.scala) { #hires_request_fields }
 

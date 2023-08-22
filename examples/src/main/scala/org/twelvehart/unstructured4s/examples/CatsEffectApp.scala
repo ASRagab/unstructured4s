@@ -27,7 +27,7 @@ object CatsEffectApp extends IOApp.Simple:
     backendResource.use { backend =>
       for
         apiKey   <- IO.fromEither(apiKeyEnv)
-        client   <- Unstructured4s.make(backend, ApiKey(apiKey))
+        client    = Unstructured4s.make(backend, ApiKey(apiKey))
         file     <- IO.fromEither(pdfEither)
         response <- client.partition(file, HiResRequestFields())
         _        <- IO.println(response.result.bimap(_.getMessage, _.mkString("\n")).merge)
