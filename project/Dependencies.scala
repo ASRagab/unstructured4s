@@ -1,7 +1,7 @@
 import sbt.*
 
 object V {
-  lazy val zio     = "2.0.15"
+  lazy val zio     = "2.0.16"
   lazy val zioCats = "23.0.0.8"
   lazy val sttp    = "3.9.0"
   lazy val circe   = "0.14.5"
