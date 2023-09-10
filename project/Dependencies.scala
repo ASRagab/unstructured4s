@@ -12,7 +12,7 @@ object Dependencies {
   lazy val catsEffect        = "org.typelevel" %% "cats-effect"                   % "3.5.1"
   lazy val catsEffectTesting = "org.typelevel" %% "cats-effect-testing-scalatest" % "1.5.0" % Test
 
-  lazy val scalaTest  = "org.scalatest"  %% "scalatest"  % "3.2.16" % Test
+  lazy val scalaTest  = "org.scalatest"  %% "scalatest"  % "3.2.17" % Test
   lazy val scalaCheck = "org.scalacheck" %% "scalacheck" % "1.17.0" % Test
 
   lazy val sttpFs2   = "com.softwaremill.sttp.client3" %% "fs2"                           % V.sttp
