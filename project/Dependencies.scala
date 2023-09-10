@@ -30,7 +30,7 @@ object Dependencies {
   lazy val zioCats    = "dev.zio" %% "zio-interop-cats"  % V.zioCats
   lazy val zioSlf4j   = "dev.zio" %% "zio-logging-slf4j" % "2.1.14"
 
-  lazy val loggingFrontend = "ch.qos.logback" % "logback-classic" % "1.4.7"
+  lazy val loggingFrontend = "ch.qos.logback" % "logback-classic" % "1.4.11"
 
   lazy val core: Seq[ModuleID] = Seq(
     cats,
