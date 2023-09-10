@@ -4,7 +4,7 @@ Global / onChangedBuildSource := ReloadOnSourceChanges
 
 Global / excludeLintKeys ++= Set(ThisBuild / pomIncludeRepository, unstructured4s / paradox / sourceDirectory)
 
-ThisBuild / scalaVersion := "3.3.0"
+ThisBuild / scalaVersion := "3.3.1"
 
 ThisBuild / mimaFailOnNoPrevious := false
 
@@ -14,7 +14,17 @@ lazy val commonSettings = Seq(
   Test / tpolecatExcludeOptions += ScalacOptions.warnNonUnitStatement
 )
 
+lazy val exampleApps = Seq(
+  "org.twelvehart.unstructured4s.examples.BasicApp",
+  "org.twelvehart.unstructured4s.examples.ZIOApp",
+  "org.twelvehart.unstructured4s.examples.CatsEffectApp"
+)
+
+lazy val runExamples = exampleApps.map(app => s"examples/runMain $app").mkString(";")
+
+addCommandAlias("runExamples", runExamples)
 addCommandAlias("prepare", "scalafmtAll;test")
+addCommandAlias("fullPrep", "clean;prepare;runExamples")
 addCommandAlias("pushSite", ";project unstructured4s;ghPagesCacheClear;ghpagesPushSite")
 
 lazy val unstructured4s = (project in file("."))
