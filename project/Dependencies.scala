@@ -8,7 +8,7 @@ object V {
 
 object Dependencies {
   lazy val cats              = "org.typelevel" %% "cats-core"                     % "2.10.0"
-  lazy val catsEffect        = "org.typelevel" %% "cats-effect"                   % "3.5.1"
+  lazy val catsEffect        = "org.typelevel" %% "cats-effect"                   % "3.5.2"
   lazy val catsEffectTesting = "org.typelevel" %% "cats-effect-testing-scalatest" % "1.5.0" % Test
 
   lazy val scalaTest  = "org.scalatest"  %% "scalatest"  % "3.2.16" % Test
@@ -30,7 +30,6 @@ object Dependencies {
   lazy val zioSlf4j   = "dev.zio" %% "zio-logging-slf4j" % "2.1.14"
 
   lazy val loggingFrontend = "ch.qos.logback" % "logback-classic" % "1.4.7"
-
 
   lazy val core: Seq[ModuleID] = Seq(
     cats,
