@@ -31,7 +31,6 @@ object Dependencies {
 
   lazy val loggingFrontend = "ch.qos.logback" % "logback-classic" % "1.4.7"
 
-
   lazy val core: Seq[ModuleID] = Seq(
     cats,
     catsEffect,
