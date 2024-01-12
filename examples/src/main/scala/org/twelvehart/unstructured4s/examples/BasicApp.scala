@@ -3,20 +3,26 @@ package org.twelvehart.unstructured4s.examples
 import org.twelvehart.unstructured4s.*
 import org.twelvehart.unstructured4s.model.*
 
-object BasicApp extends App:
+object BasicApp:
   private val backend = sttp.client3.HttpClientSyncBackend()
 
-  private val program =
+  private def program(runMode: RunMode): Either[Throwable, List[PartitionResponse]] =
     for
-      file    <- pdfEither
-      apiKey  <- apiKeyEnv
-      client   = Unstructured4s.make(backend, ApiKey(apiKey))
-      response = client.partition(file)
-      result  <- response.result
-      _        = backend.close()
+      apiKey   <- apiKeyEnv
+      client    = Unstructured4s.make(backend, ApiKey(apiKey))
+      response <- runMode.file.map(file => client.partition(file))
+      result   <- response.result
+      _         = backend.close()
     yield result
 
-  program.fold(
-    err => println(s"${err.getMessage}"),
-    res => println(s"$res")
-  )
+  def main(args: Array[String]): Unit = {
+    val runMode = handleArgs(args.toList)
+    val result  = program(runMode)
+    result match
+      case Left(error)  =>
+        println(s"Error: ${error.getMessage}")
+        System.exit(1)
+      case Right(value) =>
+        println(s"Result: $value")
+        System.exit(0)
+  }
