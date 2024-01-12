@@ -6,4 +6,38 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 # unstructured4s
+
 unstructured4s: A Scala 3 wrapper for Unstructured.io
+
+## Getting Started
+
+*IMPORTANT*: You will need git-lfs installed to clone this repository, please see the [git-lfs](https://git-lfs.github.com/)
+
+## Examples
+
+To see examples of how to use this library, please see the examples in the `examples` directory, 
+you will need JDK 11+ and sbt available as well.
+
+### Usage
+
+There are three separate versions of the app, that use a different effect ecosystem:
+
+- Cats Effect 3
+- ZIO
+- Plain Scala 3 (Blocking)
+
+To run the examples, you will need to have an `UNSTRUCTURED_API_KEY` environment variable set to your Unstructured.io
+API key.
+
+To run the examples, you can use the following command:
+
+```shell 
+UNSTRUCTURED_API_KEY=your_api_key_here "examples/runMain org.twelvehart.unstructured4s.examples.BasicApp"
+```
+
+Optionally you can pass one argument to the app which is the type of the sample file it will send to Unstructured.io:
+
+- `png`
+- `pdf`
+
+It should print some PartitionResponses to console, and then exit.

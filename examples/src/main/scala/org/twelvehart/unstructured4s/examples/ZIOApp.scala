@@ -27,14 +27,14 @@ object ZIOApp extends ZIOAppDefault:
         )
     }
 
-  private def program: ZIO[SttpClient, Throwable, Unit] =
+  private def program(runMode: RunMode): ZIO[SttpClient, Throwable, Unit] =
     ZIO.scoped {
       for
         apiKey            <- ZIO.fromEither(apiKeyEnv)
-        files             <- ZIO.fromEither(filesEither)
+        file              <- ZIO.fromEither(runMode.file)
         backend           <- ZIO.service[SttpClient]
         unstructuredClient = Unstructured4s.make(backend, ApiKey(apiKey))
-        response          <- unstructuredClient.partitionMultiple(files)
+        response          <- unstructuredClient.partition(file)
         result             = response.result.bimap(_.getMessage, _.mkString("\n")).merge
         _                 <- Console.printLine(result)
       yield ()
@@ -43,5 +43,8 @@ object ZIOApp extends ZIOAppDefault:
   override val bootstrap: ZLayer[ZIOAppArgs, Any, Any] =
     Runtime.removeDefaultLoggers >>> SLF4J.slf4j
 
-  override def run: ZIO[ZIOAppArgs & Scope, Any, Any] =
-    program.provide(live)
+  override def run: ZIO[ZIOAppArgs & Scope, Any, ExitCode] =
+    for {
+      args <- ZIO.service[ZIOAppArgs].map(_.getArgs)
+      _    <- program(handleArgs(args.toList)).provide(live)
+    } yield ExitCode.success
