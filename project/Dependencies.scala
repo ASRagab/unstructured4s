@@ -24,12 +24,12 @@ object Dependencies {
   lazy val circeGeneric = "io.circe" %% "circe-generic" % V.circe
   lazy val circeParser  = "io.circe" %% "circe-parser"  % V.circe
 
-  lazy val zioTest    = "dev.zio" %% "zio-test"          % V.zio
-  lazy val zio        = "dev.zio" %% "zio"               % V.zio
-  lazy val zioTestSbt = "dev.zio" %% "zio-test-sbt"      % V.zio
-  lazy val zioCats    = "dev.zio" %% "zio-interop-cats"  % V.zioCats
-  lazy val zioSlf4j   = "dev.zio" %% "zio-logging-slf4j" % "2.1.16"
-  lazy val loggingFrontend = "ch.qos.logback" % "logback-classic" % "1.4.14"
+  lazy val zioTest         = "dev.zio"       %% "zio-test"          % V.zio
+  lazy val zio             = "dev.zio"       %% "zio"               % V.zio
+  lazy val zioTestSbt      = "dev.zio"       %% "zio-test-sbt"      % V.zio
+  lazy val zioCats         = "dev.zio"       %% "zio-interop-cats"  % V.zioCats
+  lazy val zioSlf4j        = "dev.zio"       %% "zio-logging-slf4j" % "2.1.17"
+  lazy val loggingFrontend = "ch.qos.logback" % "logback-classic"   % "1.4.14"
 
   lazy val core: Seq[ModuleID] = Seq(
     cats,
