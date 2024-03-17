@@ -3,16 +3,16 @@ import sbt.*
 object V {
   lazy val zio     = "2.0.21"
   lazy val zioCats = "23.0.0.8"
-  lazy val sttp    = "3.9.0"
+  lazy val sttp    = "3.9.4"
   lazy val circe   = "0.14.6"
 }
 
 object Dependencies {
   lazy val cats              = "org.typelevel" %% "cats-core"                     % "2.10.0"
-  lazy val catsEffect        = "org.typelevel" %% "cats-effect"                   % "3.5.2"
+  lazy val catsEffect        = "org.typelevel" %% "cats-effect"                   % "3.5.4"
   lazy val catsEffectTesting = "org.typelevel" %% "cats-effect-testing-scalatest" % "1.5.0" % Test
 
-  lazy val scalaTest  = "org.scalatest"  %% "scalatest"  % "3.2.17" % Test
+  lazy val scalaTest  = "org.scalatest"  %% "scalatest"  % "3.2.18" % Test
   lazy val scalaCheck = "org.scalacheck" %% "scalacheck" % "1.17.0" % Test
 
   lazy val sttpFs2   = "com.softwaremill.sttp.client3" %% "fs2"                           % V.sttp
@@ -24,12 +24,12 @@ object Dependencies {
   lazy val circeGeneric = "io.circe" %% "circe-generic" % V.circe
   lazy val circeParser  = "io.circe" %% "circe-parser"  % V.circe
 
-  lazy val zioTest    = "dev.zio" %% "zio-test"          % V.zio
-  lazy val zio        = "dev.zio" %% "zio"               % V.zio
-  lazy val zioTestSbt = "dev.zio" %% "zio-test-sbt"      % V.zio
-  lazy val zioCats    = "dev.zio" %% "zio-interop-cats"  % V.zioCats
-  lazy val zioSlf4j   = "dev.zio" %% "zio-logging-slf4j" % "2.1.16"
-  lazy val loggingFrontend = "ch.qos.logback" % "logback-classic" % "1.4.14"
+  lazy val zioTest         = "dev.zio"       %% "zio-test"          % V.zio
+  lazy val zio             = "dev.zio"       %% "zio"               % V.zio
+  lazy val zioTestSbt      = "dev.zio"       %% "zio-test-sbt"      % V.zio
+  lazy val zioCats         = "dev.zio"       %% "zio-interop-cats"  % V.zioCats
+  lazy val loggingFrontend = "ch.qos.logback" % "logback-classic"   % "1.5.3"
+  lazy val zioSlf4j        = "dev.zio"       %% "zio-logging-slf4j" % "2.1.17"
 
   lazy val core: Seq[ModuleID] = Seq(
     cats,
