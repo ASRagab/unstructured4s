@@ -3,13 +3,13 @@ import sbt.*
 object V {
   lazy val zio     = "2.0.21"
   lazy val zioCats = "23.0.0.8"
-  lazy val sttp    = "3.9.0"
+  lazy val sttp    = "3.9.4"
   lazy val circe   = "0.14.6"
 }
 
 object Dependencies {
   lazy val cats              = "org.typelevel" %% "cats-core"                     % "2.10.0"
-  lazy val catsEffect        = "org.typelevel" %% "cats-effect"                   % "3.5.2"
+  lazy val catsEffect        = "org.typelevel" %% "cats-effect"                   % "3.5.4"
   lazy val catsEffectTesting = "org.typelevel" %% "cats-effect-testing-scalatest" % "1.5.0" % Test
 
   lazy val scalaTest  = "org.scalatest"  %% "scalatest"  % "3.2.17" % Test
