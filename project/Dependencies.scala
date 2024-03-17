@@ -12,7 +12,7 @@ object Dependencies {
   lazy val catsEffect        = "org.typelevel" %% "cats-effect"                   % "3.5.4"
   lazy val catsEffectTesting = "org.typelevel" %% "cats-effect-testing-scalatest" % "1.5.0" % Test
 
-  lazy val scalaTest  = "org.scalatest"  %% "scalatest"  % "3.2.17" % Test
+  lazy val scalaTest  = "org.scalatest"  %% "scalatest"  % "3.2.18" % Test
   lazy val scalaCheck = "org.scalacheck" %% "scalacheck" % "1.17.0" % Test
 
   lazy val sttpFs2   = "com.softwaremill.sttp.client3" %% "fs2"                           % V.sttp
@@ -28,8 +28,8 @@ object Dependencies {
   lazy val zio             = "dev.zio"       %% "zio"               % V.zio
   lazy val zioTestSbt      = "dev.zio"       %% "zio-test-sbt"      % V.zio
   lazy val zioCats         = "dev.zio"       %% "zio-interop-cats"  % V.zioCats
-  lazy val zioSlf4j        = "dev.zio"       %% "zio-logging-slf4j" % "2.1.16"
   lazy val loggingFrontend = "ch.qos.logback" % "logback-classic"   % "1.5.3"
+  lazy val zioSlf4j        = "dev.zio"       %% "zio-logging-slf4j" % "2.1.17"
 
   lazy val core: Seq[ModuleID] = Seq(
     cats,
