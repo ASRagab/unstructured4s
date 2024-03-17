@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta http-equiv="x-ua-compatible" content="ie=edge">
 <meta name="description" content="Unstructured4s is a Scala library for working with unstructured.io API">
-<meta name="generator" content="Paradox, paradox-material-theme=0.6.0, mkdocs-material=3.0.3">
+<meta name="generator" content="Paradox, paradox-material-theme=0.7.0, mkdocs-material=3.0.3">
 
 <meta name="lang:clipboard.copy" content="Copy to clipboard">
 <meta name="lang:clipboard.copied" content="Copied to clipboard">
@@ -159,7 +159,7 @@ ASRagab/unstructured4s
 <ul style="display: none">
 <li class="md-nav__item md-version" id="project.version">
 <label class="md-nav__link" for="__version">
-<i class="md-icon" title="Version">label_outline</i> 0.1.6
+<i class="md-icon" title="Version">label_outline</i> 0.1.7
 </label>
 </li>
 </ul>
@@ -192,9 +192,9 @@ ASRagab/unstructured4s
 <p>Requests to <a href="https://unstructured-io.github.io/unstructured/api.html">Unstructured</a> are multipart requests, the return type is always <code>json</code> despite the api allowing <code>text/csv</code> as well. This is likely to change in the future, but the recommended approach is to use the <code>json</code> response type.</p>
 <h2><a href="#partitionresponse" name="partitionresponse" class="anchor"><span class="anchor-link"></span></a><code>PartitionResponse</code></h2>
 <p>The <code>PartitionResponse</code> is a case class that represents the response from the <a href="https://unstructured-io.github.io/unstructured/api.html">Unstructured</a> for a single file.</p>
-<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/ASRagab/unstructured4s/tree/v0.1.6/core/src/main/scala/org/twelvehart/unstructured4s/model/Unstructured4sResponse.scala#L8" target="_blank" title="Go to snippet source">source</a><code class="language-scala">case class PartitionResponse(`type`: String, elementId: String, metadata: Metadata, text: String)</code></pre>
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/ASRagab/unstructured4s/tree/v0.1.7/core/src/main/scala/org/twelvehart/unstructured4s/model/Unstructured4sResponse.scala#L8" target="_blank" title="Go to snippet source">source</a><code class="language-scala">case class PartitionResponse(`type`: String, elementId: String, metadata: Metadata, text: String)</code></pre>
 <h2><a href="#unstructured4sresponse" name="unstructured4sresponse" class="anchor"><span class="anchor-link"></span></a><code>Unstructured4sResponse</code></h2>
-<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/ASRagab/unstructured4s/tree/v0.1.6/core/src/main/scala/org/twelvehart/unstructured4s/model/Unstructured4sResponse.scala#L42" target="_blank" title="Go to snippet source">source</a><code class="language-scala">case class Unstructured4sResponse[A](result: Either[Unstructured4sError, List[A]])</code></pre>
+<pre class="prettyprint"><button class="snippet-button copy-snippet" title="Copy snippet to clipboard">copy</button><a class="snippet-button go-to-source" href="https://github.com/ASRagab/unstructured4s/tree/v0.1.7/core/src/main/scala/org/twelvehart/unstructured4s/model/Unstructured4sResponse.scala#L42" target="_blank" title="Go to snippet source">source</a><code class="language-scala">case class Unstructured4sResponse[A](result: Either[Unstructured4sError, List[A]])</code></pre>
 <br/>
 <p>It wraps an <code>Either[Unstructured4sError, A]</code> where <code>A</code> is either a <code>PartitionResponse</code> or <code>List[PartitionResponse]</code> which depends on whether you called <code>partition</code> or <code>partitionMultiple</code> respectively.</p>
 <h2><a href="#unstructured4serror" name="unstructured4serror" class="anchor"><span class="anchor-link"></span></a><code>Unstructured4sError</code></h2>
@@ -205,13 +205,13 @@ ASRagab/unstructured4s
 </ul>
 </div>
 <div>
-<a href="https://github.com/ASRagab/unstructured4s/tree/v0.1.6/src/main/paradox/responses.md" title="Edit this page" class="md-source-file md-edit">
+<a href="https://github.com/ASRagab/unstructured4s/tree/v0.1.7/src/main/paradox/responses.md" title="Edit this page" class="md-source-file md-edit">
 Edit this page
 </a>
 </div>
 <div class="print-only">
 <span class="md-source-file md-version">
-0.1.6
+0.1.7
 </span>
 </div>
 </article>
@@ -242,7 +242,7 @@ Making Requests
 Powered by
 <a href="https://github.com/lightbend/paradox">Paradox</a>
 and
-<a href="https://jonas.github.io/paradox-material-theme/">Paradox Material Theme</a>
+<a href="https://sbt.github.io/sbt-paradox-material-theme/">Paradox Material Theme</a>
 
 </div>
 <div class="md-footer-social">
