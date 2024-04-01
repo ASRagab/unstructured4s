@@ -3,7 +3,7 @@ import sbt.*
 object V {
   lazy val zio     = "2.0.21"
   lazy val zioCats = "23.0.0.8"
-  lazy val sttp    = "3.9.4"
+  lazy val sttp    = "3.9.5"
   lazy val circe   = "0.14.6"
 }
 
@@ -29,7 +29,7 @@ object Dependencies {
   lazy val zioTestSbt      = "dev.zio"       %% "zio-test-sbt"      % V.zio
   lazy val zioCats         = "dev.zio"       %% "zio-interop-cats"  % V.zioCats
   lazy val loggingFrontend = "ch.qos.logback" % "logback-classic"   % "1.5.3"
-  lazy val zioSlf4j        = "dev.zio"       %% "zio-logging-slf4j" % "2.1.17"
+  lazy val zioSlf4j        = "dev.zio"       %% "zio-logging-slf4j" % "2.2.2"
 
   lazy val core: Seq[ModuleID] = Seq(
     cats,
