@@ -1,7 +1,7 @@
 addSbtPlugin("org.xerial.sbt" % "sbt-sonatype"               % "3.10.0")
 addSbtPlugin("com.github.sbt" % "sbt-pgp"                    % "2.2.1")
 addSbtPlugin("org.scalameta"  % "sbt-scalafmt"               % "2.5.2")
-addSbtPlugin("com.github.sbt" % "sbt-ci-release"             % "1.5.12")
+addSbtPlugin("com.github.sbt" % "sbt-ci-release"             % "1.6.0")
 addSbtPlugin("com.github.sbt" % "sbt-site-paradox"           % "1.6.0")
 addSbtPlugin("com.github.sbt" % "sbt-paradox-material-theme" % "0.7.0")
 addSbtPlugin("com.github.sbt" % "sbt-ghpages"                % "0.8.0")
