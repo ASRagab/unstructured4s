@@ -4,7 +4,7 @@ Global / onChangedBuildSource := ReloadOnSourceChanges
 
 Global / excludeLintKeys ++= Set(ThisBuild / pomIncludeRepository, unstructured4s / paradox / sourceDirectory)
 
-ThisBuild / scalaVersion := "3.3.3"
+ThisBuild / scalaVersion := "3.3.4"
 
 ThisBuild / mimaFailOnNoPrevious := false
 
