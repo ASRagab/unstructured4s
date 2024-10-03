@@ -14,6 +14,11 @@ lazy val commonSettings = Seq(
   Test / tpolecatExcludeOptions += ScalacOptions.warnNonUnitStatement
 )
 
+lazy val noPublishSettings = Seq(
+  publish / skip  := true,
+  publishArtifact := false
+)
+
 lazy val exampleApps = Seq(
   "org.twelvehart.unstructured4s.examples.ZIOApp",
   "org.twelvehart.unstructured4s.examples.CatsEffectApp",
@@ -32,8 +37,7 @@ lazy val unstructured4s = (project in file("."))
   .settings(
     commonSettings,
     CustomTasks.settings,
-    publish / skip                   := true,
-    Compile / publishArtifact        := false,
+    noPublishSettings,
     Compile / paradoxMaterialTheme   :=
       ParadoxMaterialTheme()
         .withColor("blue-grey", "orange")
@@ -71,8 +75,7 @@ lazy val examples = (project in file("examples"))
   .dependsOn(core)
   .settings(
     commonSettings,
-    name                      := "unstructured4s-examples",
-    publish / skip            := true,
-    Compile / publishArtifact := false,
+    name := "unstructured4s-examples",
+    noPublishSettings,
     libraryDependencies ++= Dependencies.examples
   )
