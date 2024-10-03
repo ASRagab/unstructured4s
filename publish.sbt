@@ -21,7 +21,7 @@ ThisBuild / developers := List(
 )
 
 ThisBuild / description := "Unstructured4s is a Scala library for working with unstructured.io API"
-ThisBuild / licenses    := List("The MIT License" -> new URL("https://opensource.org/license/mit/"))
+ThisBuild / licenses    := List("The MIT License" -> url("https://opensource.org/license/mit/"))
 ThisBuild / homepage    := Some(url("https://unstructured4s.twelvehart.org/"))
 
 // Remove all additional repository other than Maven Central from POM
