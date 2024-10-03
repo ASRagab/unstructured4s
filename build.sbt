@@ -15,9 +15,9 @@ lazy val commonSettings = Seq(
 )
 
 lazy val exampleApps = Seq(
-  "org.twelvehart.unstructured4s.examples.BasicApp",
   "org.twelvehart.unstructured4s.examples.ZIOApp",
-  "org.twelvehart.unstructured4s.examples.CatsEffectApp"
+  "org.twelvehart.unstructured4s.examples.CatsEffectApp",
+  "org.twelvehart.unstructured4s.examples.BasicApp"
 )
 
 lazy val runExamples = exampleApps.map(app => s"examples/runMain $app").mkString(";")

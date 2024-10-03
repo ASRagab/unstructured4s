@@ -21,8 +21,6 @@ object BasicApp:
     result match
       case Left(error)  =>
         println(s"Error: ${error.getMessage}")
-        System.exit(1)
       case Right(value) =>
         println(s"Result: $value")
-        System.exit(0)
   }

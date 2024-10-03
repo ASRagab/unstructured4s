@@ -5,7 +5,6 @@ import sttp.client3.*
 import sttp.model.Uri
 import sttp.model.Part
 
-import scala.annotation.unused
 import java.io.File
 
 export CanMultipart.given
@@ -32,9 +31,8 @@ enum OCRStrategy(val value: String):
   case Auto    extends OCRStrategy("auto")
 
 enum OutputFormat(val value: String):
-  case Json extends OutputFormat("json")
-
-  @unused("csv output is not yet supported by the api") case `Text/Csv` extends OutputFormat("text/csv")
+  case Json       extends OutputFormat("application/json")
+  case `Text/Csv` extends OutputFormat("text/csv")
 
 sealed trait Endpoint(val value: Uri):
   case object V0              extends Endpoint(uri"https://api.unstructured.io/general/v0/general")
