@@ -1,4 +1,4 @@
-import xerial.sbt.Sonatype.sonatypeCentralHost
+import xerial.sbt.Sonatype.sonatype01
 
 ThisBuild / organization         := "org.twelvehart"
 ThisBuild / organizationName     := "Twelve Hart Industries"
@@ -29,7 +29,7 @@ ThisBuild / homepage    := Some(url("https://unstructured4s.twelvehart.org/"))
 // Remove all additional repository other than Maven Central from POM
 ThisBuild / pomIncludeRepository := { _ => false }
 
-ThisBuild / sonatypeCredentialHost := sonatypeCentralHost
+ThisBuild / sonatypeCredentialHost := sonatype01
 ThisBuild / sonatypeRepository     := "https://s01.oss.sonatype.org/service/local"
 
 ThisBuild / versionScheme := Some("early-semver")
