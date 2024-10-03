@@ -3,9 +3,9 @@
 Every method on the Unstructured4s client returns an `F[Unstructured4sResponse[A]]` where `F[_]` is
 the effect capability of your chosen backend.
 
-Requests to [Unstructured] are multipart requests, the return type is always `json` despite the api
+Requests to [Unstructured] are multipart requests, the return type is always `application/json` despite the api
 allowing `text/csv` as well. This is likely to change in the future, but the recommended
-approach is to use the `json` response type.
+approach is to use the `application/json` response type, this is set by the `OutputFormat`.
 
 
 ## `PartitionResponse`
