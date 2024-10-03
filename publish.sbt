@@ -1,3 +1,5 @@
+import xerial.sbt.Sonatype.sonatypeCentralHost
+
 ThisBuild / organization         := "org.twelvehart"
 ThisBuild / organizationName     := "Twelve Hart Industries"
 ThisBuild / organizationHomepage := Some(url("https://twelvehart.org"))
@@ -21,13 +23,13 @@ ThisBuild / developers := List(
 )
 
 ThisBuild / description := "Unstructured4s is a Scala library for working with unstructured.io API"
-ThisBuild / licenses    := List("The MIT License" -> new URL("https://opensource.org/license/mit/"))
+ThisBuild / licenses    := List("The MIT License" -> url("https://opensource.org/license/mit/"))
 ThisBuild / homepage    := Some(url("https://unstructured4s.twelvehart.org/"))
 
 // Remove all additional repository other than Maven Central from POM
 ThisBuild / pomIncludeRepository := { _ => false }
 
-ThisBuild / sonatypeCredentialHost := "s01.oss.sonatype.org"
+ThisBuild / sonatypeCredentialHost := sonatypeCentralHost
 ThisBuild / sonatypeRepository     := "https://s01.oss.sonatype.org/service/local"
 
 ThisBuild / versionScheme := Some("early-semver")
